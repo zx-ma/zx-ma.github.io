@@ -1,5 +1,6 @@
 {
   "name": "gitpage",
+  "homepage": "https://zx-ma.github.io/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,7 +8,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "pnpm build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
