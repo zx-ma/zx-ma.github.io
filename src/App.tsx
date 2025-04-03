@@ -1,27 +1,24 @@
-import { useState } from "react";
+// import { useState } from "react";
+
+import { BrowserRouter, Routes, Route } from "react-router";
+import Structure from "./structure/Structure";
+import Dashboard from "./mainContent/Dashboard";
+import HungarianAssigFrontEnd from "./mainContent/Hungarian";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <div>
-        <h1 className="text-3xl font-extralight text-purple-300 underline gray">
-          Hello world!
-        </h1>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <BrowserRouter>
+        <Structure>
+          <Routes>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route
+              path="/demo/hungarian"
+              element={<HungarianAssigFrontEnd />}
+            />
+          </Routes>
+        </Structure>
+      </BrowserRouter>
     </>
   );
 }
