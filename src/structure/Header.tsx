@@ -20,6 +20,11 @@ const Header = () => {
           <span className="inline md:hidden">Hu</span>
           <span className="hidden md:inline">Hungarian</span>
         </Link>
+
+        <Link to="/demo/cbba" className="flex justify-center items-center">
+          <span className="inline">CBBA</span>
+        </Link>
+
       </nav>
     </header>
   );
