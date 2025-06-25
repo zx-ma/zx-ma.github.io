@@ -1,0 +1,38 @@
+name: Deploy Vite site
+
+on:
+  push:
+    branches: [main] # main 有提交就部署
+  workflow_dispatch: # 允许手动触发
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # 拉代码  :contentReference[oaicite:3]{index=3}
+      - uses: pnpm/action-setup@v4
+        with: { version: 10 } # 安装 pnpm  :contentReference[oaicite:4]{index=4}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm # 自动缓存依赖  :contentReference[oaicite:5]{index=5}
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build # 生成 dist/
+      - uses: actions/configure-pages@v5 # 准备 Pages 元数据  :contentReference[oaicite:6]{index=6}
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: dist } # 打包上传  :contentReference[oaicite:7]{index=7}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4 # 发布到 Pages  :contentReference[oaicite:8]{index=8}
