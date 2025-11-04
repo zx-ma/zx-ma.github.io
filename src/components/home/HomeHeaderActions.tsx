@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Mail, Github } from "lucide-react";
+import { ThemeToggle } from "@/components/home/ThemeToggle";
 
 export function HomeHeaderActions() {
   return (
@@ -16,6 +17,7 @@ export function HomeHeaderActions() {
           GitHub
         </a>
       </Button>
+      <ThemeToggle />
     </div>
   );
 }

@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarProvider,
+  SidebarInset,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   CommandDialog,
@@ -42,18 +46,21 @@ export default function HomePage() {
 
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen w-full bg-gradient-to-br from-background to-muted/30 text-foreground">
+      <div className="flex min-h-screen w-full bg-linear-to-br from-background to-muted/30 text-foreground">
         <HomeSidebar onOpenCommand={openCommandPalette} />
         <SidebarInset className="flex-1 bg-transparent">
           <div className="flex h-full min-h-0 flex-col">
-            <header className="border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+            <header className="border-b bg-background/80 backdrop-blur supports-backdrop-filter:bg-background/60">
               <div className="flex h-14 items-center justify-between px-4">
                 <div className="flex items-center gap-3">
                   <SidebarTrigger />
                   <div>
                     <p className="text-sm font-medium">Welcome back</p>
                     <p className="text-xs text-muted-foreground">
-                      {pages.find((page) => page.value === activeTab)?.description}
+                      {
+                        pages.find((page) => page.value === activeTab)
+                          ?.description
+                      }
                     </p>
                   </div>
                 </div>
@@ -62,7 +69,7 @@ export default function HomePage() {
             </header>
 
             <main className="flex flex-1 min-h-0 p-4">
-              <div className="flex h-full w-full flex-col rounded-xl border bg-background/70 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-background/50">
+              <div className="flex h-full w-full flex-col rounded-xl border bg-background/70 shadow-sm backdrop-blur supports-backdrop-filter:bg-background/50">
                 <Tabs
                   value={activeTab}
                   onValueChange={(value) => handleTabChange(value as PageValue)}
@@ -76,13 +83,22 @@ export default function HomePage() {
                     ))}
                   </TabsList>
                   <div className="flex-1">
-                    <TabsContent value="about" className="h-full data-[state=inactive]:hidden">
+                    <TabsContent
+                      value="about"
+                      className="h-full data-[state=inactive]:hidden"
+                    >
                       <AboutTab />
                     </TabsContent>
-                    <TabsContent value="projects" className="h-full data-[state=inactive]:hidden">
+                    <TabsContent
+                      value="projects"
+                      className="h-full data-[state=inactive]:hidden"
+                    >
                       <ProjectsTab />
                     </TabsContent>
-                    <TabsContent value="contact" className="h-full data-[state=inactive]:hidden">
+                    <TabsContent
+                      value="contact"
+                      className="h-full data-[state=inactive]:hidden"
+                    >
                       <ContactTab />
                     </TabsContent>
                   </div>
