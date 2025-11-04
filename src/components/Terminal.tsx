@@ -9,7 +9,9 @@ const PROMPT_HOST = "mzx";
 const PROMPT_PATH = "~";
 const PROMPT = `${PROMPT_USER}@${PROMPT_HOST}:${PROMPT_PATH}$`;
 
-type CommandHandler = (args: string[]) => Promise<string | string[] | void> | (string | string[] | void);
+type CommandHandler = (
+  args: string[]
+) => Promise<string | string[] | void> | (string | string[] | void);
 
 const registry: Record<string, CommandHandler> = {
   help: () => [
@@ -36,7 +38,7 @@ const registry: Record<string, CommandHandler> = {
     if (!file) return "usage: cat <file>";
     if (file === "about.txt") {
       return [
-        "Hi, I’m mzx — building useful things.",
+        "Hi, I'm mzx — building beautiful things.",
         "This site hides a small puzzle. Have fun!",
       ];
     }
@@ -51,7 +53,8 @@ const registry: Record<string, CommandHandler> = {
 };
 
 // Compare input to a precomputed SHA-256 hex of the secret to avoid plain-text search
-const SECRET_HASH_HEX = "1750fe118f27c9838d1495c3ccf2002fad523cce4d8cfadc332d701c9a1fea47"; // sha256("sudo nixos-rebuild switch")
+const SECRET_HASH_HEX =
+  "1750fe118f27c9838d1495c3ccf2002fad523cce4d8cfadc332d701c9a1fea47"; // sha256("sudo nixos-rebuild switch")
 
 async function sha256Hex(text: string) {
   const data = new TextEncoder().encode(text);
