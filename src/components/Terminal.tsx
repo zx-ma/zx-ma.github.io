@@ -1,8 +1,16 @@
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
-import { Snowflake } from "lucide-react";
 import type { KeyboardEvent } from "react";
 import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useTerminal } from "@/stores/terminal";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 const PROMPT_USER = "guest";
 const PROMPT_HOST = "mzx";
@@ -175,67 +183,91 @@ export default function Terminal() {
     }
   };
 
+  const showHint = () => {
+    push({ text: "Hint: commands like `help`, `ls`, `cat about.txt` can be interesting." });
+  };
+
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-black to-black/95 text-green-400 font-mono flex items-center justify-center p-4">
-      <div className="w-full max-w-3xl h-[80vh] rounded-lg border border-green-400/20 bg-black/80 shadow-2xl backdrop-blur-sm overflow-hidden">
-        {/* Title bar */}
-        <div className="h-10 border-b border-green-400/10 flex items-center gap-2 px-3">
-          <div className="flex items-center gap-2">
-            <span className="size-3 rounded-full bg-red-500/80" />
-            <span className="size-3 rounded-full bg-yellow-500/80" />
-            <span className="size-3 rounded-full bg-green-500/80" />
+    <div className="min-h-screen w-full bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700 text-neutral-100 flex items-center justify-center px-4 py-10">
+      <div className="w-full max-w-4xl rounded-3xl border border-neutral-700 bg-neutral-900/90 shadow-2xl backdrop-blur-xl">
+        <div className="border-b border-neutral-700 px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1.5">
+              <span className="size-3 rounded-full bg-rose-500/80" />
+              <span className="size-3 rounded-full bg-amber-400/80" />
+              <span className="size-3 rounded-full bg-emerald-400/80" />
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-neutral-800/70 px-3 py-1 text-xs font-semibold uppercase text-amber-300">
+              <Sparkles className="size-3" />
+              {PROMPT_HOST} shell
+            </span>
           </div>
-          <div className="ml-3 flex items-center gap-2 text-xs text-green-300/80">
-            <Snowflake className="size-4 text-sky-400" aria-hidden />
-            <span>{PROMPT_HOST} — terminal</span>
-          </div>
+          <TooltipProvider>
+            <div className="flex items-center gap-2 text-xs text-neutral-400">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="gap-2 text-neutral-300 hover:text-neutral-100"
+                    onClick={() => {
+                      showHint();
+                      inputRef.current?.focus();
+                    }}
+                  >
+                    <ArrowRight className="size-3" />
+                    Hint
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Get a gentle nudge without revealing the answer</TooltipContent>
+              </Tooltip>
+            </div>
+          </TooltipProvider>
         </div>
 
-        {/* Viewport */}
-        <div
-          ref={viewport}
-          className="h-[calc(80vh-2.5rem)] w-full overflow-y-auto px-4 py-3 selection:bg-green-500/30"
+        <ScrollArea
+          className="h-[65vh] px-6 py-5 font-mono text-sm"
           onClick={() => inputRef.current?.focus()}
         >
-          {lines.map((line, i) => (
-            <div
-              key={i}
-              className={
-                line.prompt
-                  ? "whitespace-pre-wrap font-semibold text-green-300"
-                  : "whitespace-pre-wrap"
-              }
-            >
-              {line.text}
+          <div ref={viewport} className="space-y-2">
+            {lines.map((line, i) => (
+              <div
+                key={i}
+                className={
+                  line.prompt
+                    ? "whitespace-pre-wrap font-semibold text-emerald-300"
+                    : "whitespace-pre-wrap text-neutral-400"
+                }
+              >
+                {line.text}
+              </div>
+            ))}
+
+            <div className="flex items-center gap-2 pt-2 text-emerald-300">
+              <span className="shrink-0">
+                <span>{PROMPT_USER}</span>
+                <span className="text-neutral-500">@</span>
+                <span>{PROMPT_HOST}</span>
+                <span className="text-neutral-500">:</span>
+                <span className="text-emerald-400">{PROMPT_PATH}</span>
+                <span className="text-neutral-500">$</span>
+              </span>
+              <Input
+                ref={inputRef}
+                autoFocus
+                aria-label="terminal input"
+                value={current}
+                onChange={(e) => setCurrent(e.target.value)}
+                onKeyDown={onKey}
+                className="flex-1 border-none bg-transparent px-0 font-mono text-emerald-200 caret-emerald-400 focus-visible:ring-0"
+              />
             </div>
-          ))}
 
-          {/* Prompt row */}
-          <div className="flex items-center gap-2 pt-1">
-            <span className="shrink-0">
-              <span className="text-green-300">{PROMPT_USER}</span>
-              <span className="text-green-500">@</span>
-              <span className="text-green-300">{PROMPT_HOST}</span>
-              <span className="text-green-500">:</span>
-              <span className="text-emerald-400">{PROMPT_PATH}</span>
-              <span className="text-green-500">$</span>
-            </span>
-            <Input
-              ref={inputRef}
-              autoFocus
-              aria-label="terminal input"
-              value={current}
-              onChange={(e) => setCurrent(e.target.value)}
-              onKeyDown={onKey}
-              className="flex-1 bg-transparent border-none focus-visible:ring-0 outline-none caret-green-400 text-green-200 placeholder:text-green-500 font-mono"
-            />
+            <p className="text-xs text-neutral-500">
+              Tip: ↑↓ for history • Tab to autocomplete • type `help` for a command list
+            </p>
           </div>
-
-          {/* Hint */}
-          <div className="mt-2 text-xs text-green-300/60">
-            Tip: Up/Down for history • Tab to complete • type `help`
-          </div>
-        </div>
+        </ScrollArea>
       </div>
     </div>
   );
