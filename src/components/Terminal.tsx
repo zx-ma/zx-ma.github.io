@@ -10,7 +10,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useTerminal } from "@/stores/terminal";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const PROMPT_USER = "guest";
 const PROMPT_HOST = "mzx";
@@ -18,7 +18,7 @@ const PROMPT_PATH = "~";
 const PROMPT = `${PROMPT_USER}@${PROMPT_HOST}:${PROMPT_PATH}$`;
 
 type CommandHandler = (
-  args: string[]
+  args: string[],
 ) => Promise<string | string[] | void> | (string | string[] | void);
 
 const registry: Record<string, CommandHandler> = {
@@ -184,11 +184,13 @@ export default function Terminal() {
   };
 
   const showHint = () => {
-    push({ text: "Hint: commands like `help`, `ls`, `cat about.txt` can be interesting." });
+    push({
+      text: "Hint: commands like `help`, `ls`, `cat about.txt` can be interesting.",
+    });
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-700 text-neutral-100 flex items-center justify-center px-4 py-10">
+    <div className="min-h-screen w-full bg-linear-to-br from-neutral-900 via-neutral-800 to-neutral-700 text-neutral-100 flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-4xl rounded-3xl border border-neutral-700 bg-neutral-900/90 shadow-2xl backdrop-blur-xl">
         <div className="border-b border-neutral-700 px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -198,7 +200,6 @@ export default function Terminal() {
               <span className="size-3 rounded-full bg-emerald-400/80" />
             </span>
             <span className="inline-flex items-center gap-1 rounded-full bg-neutral-800/70 px-3 py-1 text-xs font-semibold uppercase text-amber-300">
-              <Sparkles className="size-3" />
               {PROMPT_HOST} shell
             </span>
           </div>
@@ -219,7 +220,9 @@ export default function Terminal() {
                     Hint
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>Get a gentle nudge without revealing the answer</TooltipContent>
+                <TooltipContent>
+                  Get a gentle nudge without revealing the answer
+                </TooltipContent>
               </Tooltip>
             </div>
           </TooltipProvider>
@@ -236,7 +239,9 @@ export default function Terminal() {
                 className={
                   line.prompt
                     ? "whitespace-pre-wrap font-semibold text-emerald-300"
-                    : "whitespace-pre-wrap text-neutral-400"
+                    : line.isBanner
+                      ? "whitespace-pre font-bold text-emerald-400 ascii-banner"
+                      : "whitespace-pre-wrap text-neutral-400"
                 }
               >
                 {line.text}
@@ -264,7 +269,8 @@ export default function Terminal() {
             </div>
 
             <p className="text-xs text-neutral-500">
-              Tip: ↑↓ for history • Tab to autocomplete • type `help` for a command list
+              Tip: ↑↓ for history • Tab to autocomplete • type `help` for a
+              command list
             </p>
           </div>
         </ScrollArea>

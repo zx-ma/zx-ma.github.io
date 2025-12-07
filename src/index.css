@@ -107,3 +107,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .ascii-banner {
+    line-height: 1;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+    font-feature-settings: "kern" 0;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

@@ -4,7 +4,7 @@ export const pages = [
   {
     value: "about" as const,
     label: "About",
-    description: "Who I am and what I'm exploring.",
+    description: "me....",
     icon: User,
   },
   {
@@ -16,7 +16,7 @@ export const pages = [
   {
     value: "contact" as const,
     label: "Contact",
-    description: "Ways to reach me around the web.",
+    description: "contact me",
     icon: Mail,
   },
 ];
@@ -44,56 +44,27 @@ export const highlights = [
 
 export const latestWriting = [
   {
-    label: "Hyprland motion system",
-    href: "/blog/hyprland-motion",
-  },
-  {
-    label: "Building command palettes",
-    href: "/blog/command-palette",
-  },
-  {
-    label: "Tailwind v4 migration notes",
-    href: "/blog/tailwind-v4-migration",
-  },
-  {
-    label: "Designing UI motion systems",
-    href: "/blog/ui-motion-systems",
+    label: "to do",
+    href: "to do",
   },
 ];
 
 export const aboutContent = {
-  intro: `Replace this paragraph with your story. Talk about what you're building,
-what you're learning, and what visitors should explore next.`,
-  currently: [
-    "Experimenting with terminal-inspired web UIs.",
-    "Writing about tools, workflows, and creative coding.",
-    "Exploring declarative window managers like Hyprland/Niri.",
-  ],
+  intro: `about`,
+  currently: ["to do"],
 };
 
 export const projectsContent = [
   {
-    title: "terminal-ui",
-    description:
-      "A playful terminal puzzle that unlocks this portfolio experience.",
-  },
-  {
-    title: "personal-site",
-    description:
-      "A Vite + React + Tailwind playground for experimenting with motion and UI states.",
-  },
-  {
-    title: "writing",
-    description:
-      "Notes on workflow, open source contributions, and daily tooling tweaks.",
+    title: "to do",
+    description: "to do",
   },
 ];
 
 export const contactContent = {
-  intro: "Drop a note or follow along where I'm most active.",
+  intro: "contact me",
   entries: [
-    { label: "Email", value: "hello@example.com" },
-    { label: "GitHub", value: "github.com/yourname" },
-    { label: "Newsletter", value: "Share notes, deep dives, or upcoming talks here." },
+    { label: "Email", value: "zhexuanma@gmail.com" },
+    { label: "GitHub", value: "github.com/zx-ma" },
   ],
 };

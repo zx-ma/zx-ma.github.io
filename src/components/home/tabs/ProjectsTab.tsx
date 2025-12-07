@@ -7,9 +7,7 @@ export function ProjectsTab() {
       <div className="space-y-6">
         <section className="space-y-2">
           <h2 className="text-2xl font-semibold">Selected Projects</h2>
-          <p className="text-sm text-muted-foreground">
-            Highlight a few things you're proud of. Link to live demos or blog posts for deeper dives.
-          </p>
+          <p className="text-sm text-muted-foreground">to be finished.</p>
         </section>
         <div className="space-y-4">
           {projectsContent.map((project) => (
