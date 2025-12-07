@@ -13,8 +13,8 @@ import {
   CommandList,
   CommandEmpty,
 } from "@/components/ui/command";
-import { pages } from "@/data/home";
-import type { PageValue } from "@/data/home";
+import { pages } from "@/config/home";
+import type { PageValue } from "@/config/home";
 import { HomeSidebar } from "@/components/home/HomeSidebar";
 import { HomeHeaderActions } from "@/components/home/HomeHeaderActions";
 import { AboutTab } from "@/components/home/tabs/AboutTab";

@@ -1,5 +1,5 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { projectsContent } from "@/data/home";
+import { projectsContent } from "@/config/home";
 
 export function ProjectsTab() {
   return (

@@ -1,5 +1,5 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { contactContent } from "@/data/home";
+import { contactContent } from "@/config/home";
 
 export function ContactTab() {
   return (

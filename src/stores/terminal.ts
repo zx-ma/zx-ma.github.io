@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { getBannerLines } from "@/constants/banner";
+import { getBannerLines } from "@/config/banner";
 
 export interface Line {
   text: string;
@@ -23,7 +23,7 @@ const getInitialLines = () => [
   { text: "" },
   { text: "           ❄  Nix • mzx@website" },
   { text: "----------------------------------------" },
-  { text: "👋 Hey! I'm MZX - CS student, NixOS enthusiast, terminal UI lover" },
+  { text: "👋 Hey! I'm MZX - Computer Science and Robotics student" },
   { text: "" },
   { text: "Type 'help' to see available commands." },
   { text: "Use Up/Down for history, Tab for completion." },
@@ -37,4 +37,4 @@ export const useTerminal = create<TerminalState>((set) => ({
   setCurrent: (value) => set({ current: value }),
   clear: () => set({ lines: getInitialLines() }),
   unlock: () => set({ unlocked: true }),
-})); 
+}));

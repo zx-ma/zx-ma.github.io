@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { Command as CommandIcon } from "lucide-react";
-import { highlights, latestWriting } from "@/data/home";
+import { highlights, latestWriting } from "@/config/home";
 
 interface HomeSidebarProps {
   onOpenCommand: () => void;

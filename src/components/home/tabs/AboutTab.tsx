@@ -1,6 +1,6 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { aboutContent } from "@/data/home";
+import { aboutContent } from "@/config/home";
 
 export function AboutTab() {
   return (
