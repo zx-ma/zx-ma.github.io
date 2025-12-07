@@ -2,15 +2,7 @@ import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { useTerminal } from "@/stores/terminal";
-import { ArrowRight } from "lucide-react";
 
 const PROMPT_USER = "guest";
 const PROMPT_HOST = "mzx";
@@ -183,12 +175,6 @@ export default function Terminal() {
     }
   };
 
-  const showHint = () => {
-    push({
-      text: "Hint: commands like `help`, `ls`, `cat about.txt` can be interesting.",
-    });
-  };
-
   return (
     <div className="min-h-screen w-full bg-linear-to-br from-neutral-900 via-neutral-800 to-neutral-700 text-neutral-100 flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-4xl rounded-3xl border border-neutral-700 bg-neutral-900/90 shadow-2xl backdrop-blur-xl">
@@ -203,29 +189,6 @@ export default function Terminal() {
               {PROMPT_HOST} shell
             </span>
           </div>
-          <TooltipProvider>
-            <div className="flex items-center gap-2 text-xs text-neutral-400">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="gap-2 text-neutral-300 hover:text-neutral-100"
-                    onClick={() => {
-                      showHint();
-                      inputRef.current?.focus();
-                    }}
-                  >
-                    <ArrowRight className="size-3" />
-                    Hint
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  Get a gentle nudge without revealing the answer
-                </TooltipContent>
-              </Tooltip>
-            </div>
-          </TooltipProvider>
         </div>
 
         <ScrollArea
